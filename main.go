@@ -34,8 +34,25 @@ func do_enum() *pb.Enumeration {
 	}
 }
 
+func do_oneof(message any) {
+	switch x := message.(type) {
+	case *pb.Result_Id:
+		fmt.Println(message.(*pb.Result_Id).Id)
+	case *pb.Result_Message:
+		fmt.Println(message.(*pb.Result_Message).Message)
+	default:
+		fmt.Errorf("message has unexpeted type: %v", x)
+	}
+}
+
 func main() {
 	fmt.Println(do_simple())
 	fmt.Println(do_complex())
 	fmt.Println(do_enum())
+
+	fmt.Println("This should be an Id:")
+	do_oneof(&pb.Result_Id{Id: 42})
+
+	fmt.Println("This should be an Message:")
+	do_oneof(&pb.Result_Message{Message: "a message is here"})
 }
