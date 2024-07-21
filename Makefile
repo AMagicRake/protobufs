@@ -7,5 +7,5 @@ generate:
 		protoc -Iproto --go_opt=module=${PACKAGE} --go_out=. proto/*.proto
 
 clean:
-		rm proto*.pb.go
-		rm proto-go-course
+		rm proto/*.pb.go
+		rm excersies/*.pb.go
